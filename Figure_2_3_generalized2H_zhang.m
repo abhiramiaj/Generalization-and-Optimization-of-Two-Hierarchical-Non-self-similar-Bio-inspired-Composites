@@ -47,7 +47,8 @@ set(gca,'fontsize',14)
 set(gcf,'color','w')
 
 subplot(1,2,2)
-for n2=[2,3,4,5,6,7,8,9,10]
+
+for n2=[2 3 4 5 6 7 8 9 10]
     for i=1:numel(n1)
         as(i)=(ps1.*rs1.*rs1.*gbe)./(3*(1-ps1));
         D(i)=(((n1(i).*((3*n1(i))-4))./(3*((n1(i)-1).^2)))+(((n1(i).*n1(i))./(3*(n1(i)-1).*as(i)))));
@@ -56,16 +57,18 @@ for n2=[2,3,4,5,6,7,8,9,10]
         Ess(i)=Erat2hss(i)*Ep*ps1*ps2;
         rs1crit2hss(i)=(n1(i)-1)*sigtotau;
         if rs1<=rs1crit2hss(i)
-            rs2crit2hss(i)=((n2-1)*(n1(i)-1)*ps1*rs1*sigtotau)./n1(i);
+            rs2crit2hss(i)=((n2-1)*(n1(i)-1)*ps1*rs1*sigtotau)./(n1(i)*rs1crit2hss(i));
         else
             rs2crit2hss(i)=((n2-1)*ps1*(n1(i)-1)*sigtotau)./n1(i);
         end 
-    %case 1 n 2
+ 
+   
+   %case 1 n 2
     if rs2<=rs2crit2hss(i)
         sigrat2hss(i) = rs1./(n2.*ps1.*sigtotau);
     %case 3
     elseif rs2>rs2crit2hss(i) && rs1<=rs1crit2hss(i)
-        sigrat2hss(i)=((n2-n1(i)).*rs1)./(n1(i).*n2.*sigtotau);
+        sigrat2hss(i)=((n2-1).*rs1)./(n1(i).*n2.*sigtotau);
     %case 4
     else
         sigrat2hss(i)=((n1(i)-1).*(n2-1))./(n1(i).*n2);
@@ -75,6 +78,7 @@ for n2=[2,3,4,5,6,7,8,9,10]
     plot (n1,sigrat2hss,'linewidth',1.5)
     hold on;
 end
+
 %  title('SW within Regular')
 xlabel ('n_1', 'fontsize', 18,'fontweight','bold')
 ylabel ('\sigma_{SS}/\sigma_p \phi_{1} \phi_{2}', 'fontsize', 18,'fontweight','bold')
@@ -93,16 +97,16 @@ for n2=[2,3,4,5,6,7,8,9,10]
         Ess(i)=Erat2hss(i)*Ep*ps1*ps2;
         rs1crit2hss(i)=(n1(i)-1)*sigtotau;
         if rs1<=rs1crit2hss(i)
-            rs2crit2hss(i)=((n2-1)*(n1(i)-1)*ps1*rs1*sigtotau)./n1(i);
+            rs2crit2hss(i)=((n2-1)*(n1(i)-1)*ps1*rs1*sigtotau)./(n1(i)*rs1crit2hss(i));
         else
             rs2crit2hss(i)=((n2-1)*ps1*(n1(i)-1)*sigtotau)./n1(i);
-        end
+        end 
         %case 1 n 2
         if rs2<=rs2crit2hss(i)
             sigrat2hss(i) = rs1./(n2.*ps1.*sigtotau);
         %case 3
         elseif rs2>rs2crit2hss(i) && rs1<=rs1crit2hss(i)
-            sigrat2hss(i)=((n2-n1(i)).*rs1)./(n1(i).*n2.*sigtotau);
+            sigrat2hss(i)=((n2-1).*rs1)./(n1(i).*n2.*sigtotau);
     %case 4
         else
             sigrat2hss(i)=((n1(i)-1).*(n2-1))./(n1(i).*n2);
@@ -132,7 +136,7 @@ for n2=[2,3,4,5,6,7,8,9,10]
         Ess(i)=Erat2hss(i)*Ep*ps1*ps2;
         rs1crit2hss(i)=(n1(i)-1)*sigtotau;
         if rs1<=rs1crit2hss(i)
-            rs2crit2hss(i)=((n2-1)*(n1(i)-1)*ps1*rs1*sigtotau)./n1(i);
+            rs2crit2hss(i)=((n2-1)*(n1(i)-1)*ps1*rs1*sigtotau)./(n1(i)*rs1crit2hss(i));
         else
             rs2crit2hss(i)=((n2-1)*ps1*(n1(i)-1)*sigtotau)./n1(i);
         end 
@@ -142,7 +146,7 @@ for n2=[2,3,4,5,6,7,8,9,10]
    
     %case 3
     elseif rs2>rs2crit2hss(i) && rs1<=rs1crit2hss(i)
-        sigrat2hss(i)=((n2-n1(i)).*rs1)./(n1(i).*n2.*sigtotau);
+        sigrat2hss(i)=((n2-1).*rs1)./(n1(i).*n2.*sigtotau);
     %case 4
     else
         sigrat2hss(i)=((n1(i)-1).*(n2-1))./(n1(i).*n2);
